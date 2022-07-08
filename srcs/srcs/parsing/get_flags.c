@@ -28,7 +28,9 @@ int 	get_flags(const char *s, int *flags)
 		n = ft_strchr_index(FLAGS_LIST, (const int)s[i]);
 		if (n == -1)	
 			return (0);
-		debug_print("PARS: %c param: %i\n", s[i], flag_need_param((1 << n)));	
+		debug_print("PARS: %c param: %i\n", s[i], flag_need_param((1 << n)));
+
+		set_flags(s + i, (1 << n));
 		++i;
 	}
 	return (1);

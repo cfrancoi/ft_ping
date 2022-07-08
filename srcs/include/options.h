@@ -21,4 +21,8 @@
 int 	get_flags(const char *s, int *flags);
 int 	flag_need_param(int flag);
 
+int	set_flags(const char *s, int flags);
+
+
+
 #endif

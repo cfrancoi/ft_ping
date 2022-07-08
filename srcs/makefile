@@ -13,6 +13,7 @@ INC		= $(addprefix $(INC_DIR), $(INC_FILE))
 SRCS_DIR	= ./srcs/
 SRCS_FILE	= main.c
 SRCS_FILE	+= parsing/get_flags.c
+SRCS_FILE	+= parsing/set_flags.c
 SRCS_FILE	+= parsing/flag_need_param.c
 #For each subdirectory
 PARSING_DIR	= $(addprefix $(SRCS_DIR), parsing/)
