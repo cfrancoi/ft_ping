@@ -2,35 +2,34 @@
 #include <debug.h>
 
 
-static int	ft_strchr_index(const char *s, const int c)
-{
-	int		i;
 
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		++i;
-	}
-	return (-1);
-}
 
-int 	get_flags(const char *s, int *flags)
+/**
+ *	s //av
+ *	flags // struct of flags
+ *
+ *	pars s and set opt
+*/
+int 	get_flags(const char **s, t_options *opts)
 {
 	int i;
+	int j;
 	int n;
 
 	i = 0;
-	(void)flags;
+	//TODO init defautlt value of flags
+	(void)opts;
 	while (s[i])
 	{
-		n = ft_strchr_index(FLAGS_LIST, (const int)s[i]);
-		if (n == -1)	
-			return (0);
-		debug_print("PARS: %c param: %i\n", s[i], flag_need_param((1 << n)));
+		j = 0;
+		if (s[i][j] && s[i][j] != '-')
+		{
 
-		set_flags(s + i, (1 << n));
+		}
+		else 
+		{
+
+		}
 		++i;
 	}
 	return (1);

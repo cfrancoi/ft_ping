@@ -1,7 +1,7 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-
+#include <unistd.h>
 //define flags
 
 #define FLAG_H 0b1
@@ -18,10 +18,18 @@
 
 //function utils
 
-int 	get_flags(const char *s, int *flags);
+typedef struct	s_options
+{
+	int	flags;
+	int	count;
+	size_t	size;
+}		t_options;
+
+
+int 	get_flags(const char **s, t_options *opts);
 int 	flag_need_param(int flag);
 
-int	set_flags(const char *s, int flags);
+int	set_flags(const char **s, t_options *opts);
 
 
 
