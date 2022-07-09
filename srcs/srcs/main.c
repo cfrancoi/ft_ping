@@ -4,7 +4,6 @@
 
 int main(int ac, const char **av)
 {
-	
 	t_options opts;
 
 	debug_print("FT_PING: start program\n");	

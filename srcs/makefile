@@ -16,7 +16,9 @@ SRCS_FILE	+= parsing/get_flags.c
 SRCS_FILE	+= parsing/set_flags.c
 SRCS_FILE	+= parsing/flag_need_param.c
 SRCS_FILE	+= parsing/set_simple_flag.c
+SRCS_FILE	+= parsing/init_t_options.c
 SRCS_FILE	+= parsing/add_mask.c
+SRCS_FILE	+= parsing/set_flag_h.c
 SRCS_FILE	+= parsing/set_flag_c.c
 SRCS_FILE	+= parsing/set_flag_s.c
 #For each subdirectory

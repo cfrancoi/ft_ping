@@ -15,9 +15,10 @@ static int	ft_strchr_index(const char *s, const int c)
 	return (-1);
 }
 
+
 static int(*g_func_flag[])(const char *, t_options *opts, int flag) =
 {
-	set_simple_flag,	//FLAG_H
+	set_flag_h,	//FLAG_H
 	set_simple_flag,	//FLAG_V
 	set_simple_flag,	//FLAG_4
 	set_simple_flag,	//FLAG_6
@@ -25,6 +26,14 @@ static int(*g_func_flag[])(const char *, t_options *opts, int flag) =
 	set_flag_s			//FLAG_S
 };
 
+
+/**
+ * 	return:
+ * 	-1 : exit with err
+ * 	0  : ok
+ * 	1  : next av
+ *  2  : exit without err
+ */
 int	set_flags(const char **s, size_t *i, size_t *j, t_options *opts)
 {	
 	int n;
@@ -37,9 +46,8 @@ int	set_flags(const char **s, size_t *i, size_t *j, t_options *opts)
 	while (s[*i] && s[*i][*j])
 	{
 		n = ft_strchr_index(FLAGS_LIST, (const int)s[*i][*j]);
-		//TODO return usage FLAG_H
 		if (n == -1)	
-			return (0);
+			return (g_func_flag[0](&s[*i][*j], opts, FLAG_H));
 		flag = (1 << n);
 		
 		debug_print("PARS: %c param: %i\n", s[*i][*j], flag_need_param(flag));
@@ -47,19 +55,20 @@ int	set_flags(const char **s, size_t *i, size_t *j, t_options *opts)
 		if (flag_need_param(flag))
 		{
 			if (s[*i][*j + 1] != '\0')
-				ret = g_func_flag[n](&s[*i][(*j)++], opts, flag);
+				(*j)++;
 			else if (s[*i + 1] != NULL)
-				ret = g_func_flag[n](&s[(*i)++][0], opts, flag);
+			{
+				(*i)++;
+				(*j) = 0;
+			}
 			else
-				return (1);
-			ret = g_func_flag[n](&s[*i][*j], opts, flag);
-			return(ret);
+				return (-1);
 		}
-		else
-		{
-			g_func_flag[n](&s[*i][*j], opts, flag);
-		}
-		(*j)++;//*j = *j + 1;
+
+		ret = g_func_flag[n](&s[*i][*j], opts, flag);
+		if (ret != 0)
+			return (ret);
+		(*j)++;
 	}
 
 	return (0);
