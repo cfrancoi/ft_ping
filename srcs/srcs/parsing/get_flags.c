@@ -12,25 +12,28 @@
 */
 int 	get_flags(const char **s, t_options *opts)
 {
-	int i;
-	int j;
-	int n;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
+	j = 0;
 	//TODO init defautlt value of flags
-	(void)opts;
-	while (s[i])
+	while (s[i] != NULL)
 	{
+		debug_print("FT_PING: get flags : %s\n", s[i]);
 		j = 0;
-		if (s[i][j] && s[i][j] != '-')
+		if (s[i] && s[i][j] != '-')
 		{
 
 		}
 		else 
 		{
-
+			j++; // skip '-'
+			if (set_flags(s, &i, &j, opts))
+				return (1);
 		}
-		++i;
+		if (s[i])
+			++i;
 	}
-	return (1);
+	return (0);
 }

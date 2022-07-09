@@ -2,7 +2,7 @@
 #include "debug.h"
 #include "options.h"
 
-int main(int ac, char **av)
+int main(int ac, const char **av)
 {
 	
 	t_options opts;
@@ -12,8 +12,13 @@ int main(int ac, char **av)
 	(void)av;
 
 
-	if (av[1])
-		(void)get_flags(av[1], NULL);	
+	if (ac > 1)
+	{
+		if (get_flags((const char **)&av[1], &opts) == 0)
+		{
+			debug_print("FT_PING: can be start !\n");
+		}
+	}
 
 	return (0);	
 }

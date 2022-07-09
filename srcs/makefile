@@ -1,7 +1,7 @@
 
 #Compile params
 CC	= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g3 -fsanitize=address
 
 #Files
 
@@ -15,6 +15,10 @@ SRCS_FILE	= main.c
 SRCS_FILE	+= parsing/get_flags.c
 SRCS_FILE	+= parsing/set_flags.c
 SRCS_FILE	+= parsing/flag_need_param.c
+SRCS_FILE	+= parsing/set_simple_flag.c
+SRCS_FILE	+= parsing/add_mask.c
+SRCS_FILE	+= parsing/set_flag_c.c
+SRCS_FILE	+= parsing/set_flag_s.c
 #For each subdirectory
 PARSING_DIR	= $(addprefix $(SRCS_DIR), parsing/)
 
@@ -40,7 +44,7 @@ all: $(NAME)
 	@echo $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(oCFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 debug: CFLAGS += -D DEBUG_TEST
 debug: re
