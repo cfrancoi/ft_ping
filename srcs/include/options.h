@@ -20,8 +20,9 @@
 
 typedef struct	s_options
 {
-	int	flags;
-	int	count;
+	char	*host;
+	int		flags;
+	int		count;
 	size_t	size;
 }		t_options;
 
