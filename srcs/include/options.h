@@ -16,14 +16,12 @@
 
 #define FLAG_NEED_PARAM (FLAG_C | FLAG_S)
 
-//function utils
-
 typedef struct	s_options
 {
-	char	*host;
-	int		flags;
-	int		count;
-	size_t	size;
+	const char	*host;
+	int			flags;
+	int			count;
+	size_t		size;
 }		t_options;
 
 #define DEFAULT_SIZE 56

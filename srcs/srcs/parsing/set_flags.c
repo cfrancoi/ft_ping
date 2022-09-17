@@ -18,7 +18,7 @@ static int	ft_strchr_index(const char *s, const int c)
 
 static int(*g_func_flag[])(const char *, t_options *opts, int flag) =
 {
-	set_flag_h,	//FLAG_H
+	set_flag_h,			//FLAG_H
 	set_simple_flag,	//FLAG_V
 	set_simple_flag,	//FLAG_4
 	set_simple_flag,	//FLAG_6

@@ -1,7 +1,7 @@
 
 #Compile params
 CC	= gcc
-CFLAGS	= -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra
 
 #Files
 
@@ -9,9 +9,15 @@ NAME		= ft_ping
 INC_DIR		= ./include/
 INC_FILE	+= debug.h
 INC_FILE	+= options.h
+INC_FILE	+= ping.h
+INC_FILE	+= icmphdr.h
+INC_FILE	+= iphdr.h
+
 INC		= $(addprefix $(INC_DIR), $(INC_FILE))
 SRCS_DIR	= ./srcs/
 SRCS_FILE	= main.c
+
+## PARSING ##
 SRCS_FILE	+= parsing/get_flags.c
 SRCS_FILE	+= parsing/set_flags.c
 SRCS_FILE	+= parsing/flag_need_param.c
@@ -21,8 +27,18 @@ SRCS_FILE	+= parsing/add_mask.c
 SRCS_FILE	+= parsing/set_flag_h.c
 SRCS_FILE	+= parsing/set_flag_c.c
 SRCS_FILE	+= parsing/set_flag_s.c
+## IP ##
+SRCS_FILE	+= ip/init_iphdr.c
+## ICMP ##
+SRCS_FILE	+= icmp/init_icmphdr.c
+SRCS_FILE	+= icmp/create_icmp_pckt.c
+
+## PING_LIST ##
+
 #For each subdirectory
 PARSING_DIR	= $(addprefix $(SRCS_DIR), parsing/)
+IP_DIR		=  $(addprefix $(SRCS_DIR), ip/)
+ICMP_DIR	=  $(addprefix $(SRCS_DIR), icmp/)
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 OBJS_DIR	= ./objs/
@@ -41,6 +57,13 @@ $(OBJS_DIR)%.o: $(PARSING_DIR)%.c $(INC)
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR) -I $(LIBFT_INC)
 
+$(OBJS_DIR)%.o: $(IP_DIR)%.c $(INC)
+	@mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR) -I $(LIBFT_INC)
+
+$(OBJS_DIR)%.o: $(ICMP_DIR)%.c $(INC)
+	@mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR) -I $(LIBFT_INC)
 
 all: $(NAME)
 	@echo $(NAME)

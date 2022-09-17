@@ -26,7 +26,8 @@ int 	get_flags(const char **s, t_options *opts)
 		j = 0;
 		if (s[i] && s[i][j] != '-')
 		{
-			opts->host = &s[i];
+			opts->host = s[i];
+			debug_print("FT_PING: host is : %s\n", s[i]);
 		}
 		else 
 		{
