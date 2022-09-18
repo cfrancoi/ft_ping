@@ -38,4 +38,10 @@ void		push_back(ping_t **head, ping_t *to_add);
 
 void		clear_one(ping_t *data);
 void		clear_all(ping_t *head);
+/**
+ * MAIN FUNCTION
+ */
+int			init_routine(void);
+
+ 
 #endif // __PING_H__

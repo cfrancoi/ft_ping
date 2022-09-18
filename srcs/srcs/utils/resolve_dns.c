@@ -8,8 +8,10 @@
 #include <stdio.h>
 #include <netinet/in.h>
 
+#include <string.h> 
+
 // FIX clean me !
-int resolve_dns(char *c_addr, struct in_addr *dst)
+int resolve_dns(const char *c_addr, struct in_addr *dst)
 {
 	struct addrinfo hints;
 	struct addrinfo *result, *rp;
@@ -25,7 +27,7 @@ int resolve_dns(char *c_addr, struct in_addr *dst)
 	s = getaddrinfo(c_addr, NULL, &hints, &result);
    //s = getaddrinfo(argv[1], NULL, NULL, &result);
    if (s != 0) {
-       fprintf(2, "getaddrinfo: %s\n", gai_strerror(s));
+       fprintf(stderr, "getaddrinfo: %s\n", (char *)gai_strerror(s));
        return 1;
    }
 
@@ -42,7 +44,7 @@ int resolve_dns(char *c_addr, struct in_addr *dst)
 		*/
 
 		char str[INET_ADDRSTRLEN];
-		if (inet_ntop(AF_INET, &(internet_addr->sin_addr), str, INET_ADDRSTRLEN) < 0)
+		if (inet_ntop(AF_INET, &(internet_addr->sin_addr), str, INET_ADDRSTRLEN) == 0)
 			return 1;
 		fprintf(stdout, "address is: %s\n", str);
 		fprintf(stdout, "dns is: %s\n", rp->ai_canonname);

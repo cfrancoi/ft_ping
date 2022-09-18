@@ -30,5 +30,6 @@ typedef struct iphdr_s
 #define IP_PROTO_ICMP 1
 
 void	init_iphdr(iphdr_t *hdr, uint16_t len, u_char ttl, struct in_addr ip[2]);
+int		create_iphdr(int packet_size, const char *to, iphdr_t *dst_ip);
 
 #endif // __IPHDR_H__
