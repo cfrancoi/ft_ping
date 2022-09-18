@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 
-int create_iphdr(int packet_size,const char *to, iphdr_t *dst_ip)
+int create_iphdr(int packet_size, u_char ttl, const char *to, iphdr_t *dst_ip)
 {
 	iphdr_t			ip;
 
@@ -39,7 +39,7 @@ int create_iphdr(int packet_size,const char *to, iphdr_t *dst_ip)
 
 	ips[0] = src;
 	ips[1] = dst;
-	init_iphdr(&ip, packet_size, 255, ips);
+	init_iphdr(&ip, packet_size, ttl, ips);
 	printf("IP Header init \n");
 
 	ip.ip_sum = checksum(&ip, IP_HEADER_LEN);

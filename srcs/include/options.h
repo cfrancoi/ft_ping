@@ -18,13 +18,15 @@
 
 typedef struct	s_options
 {
-	const char	*host;
-	int			flags;
-	int			count;
-	size_t		size;
+	const char		*host;
+	int				flags;
+	int				count;
+	unsigned char	ttl;
+	size_t			size;
 }		t_options;
 
 #define DEFAULT_SIZE 56
+#define DEFAULT_TTL 255
 #define DEFAULT_COUNT -1
 
 /** 

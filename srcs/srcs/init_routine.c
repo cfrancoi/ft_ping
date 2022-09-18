@@ -7,9 +7,9 @@ int init_routine(void)
 	debug_print("FT_PING: can be start !\n");
 	iphdr_t iphdr;
 
-	create_iphdr(DEFAULT_SIZE, g_ping_data.opts.host, &iphdr);
+	create_iphdr(DEFAULT_SIZE, g_ping_data.opts.ttl, g_ping_data.opts.host, &iphdr);
 
-	
+
 
 	return (0);
 }
