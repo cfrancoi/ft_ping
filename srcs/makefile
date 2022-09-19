@@ -18,6 +18,7 @@ INC		= $(addprefix $(INC_DIR), $(INC_FILE))
 SRCS_DIR	= ./srcs/
 SRCS_FILE	= main.c
 SRCS_FILE	+= init_routine.c
+SRCS_FILE	+= start_routine.c
 
 ## PARSING ##
 SRCS_FILE	+= parsing/get_flags.c
@@ -38,6 +39,7 @@ SRCS_FILE	+= icmp/create_icmp_pckt.c
 ## UTILS ## 
 SRCS_FILE	+= utils/checksum.c
 SRCS_FILE	+= utils/resolve_dns.c
+SRCS_FILE	+= utils/create_packet.c
 
 ## PING_LIST ##
 

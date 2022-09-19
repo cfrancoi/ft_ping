@@ -7,6 +7,7 @@
 
 #include <sys/time.h>
 #include "options.h"
+#include "iphdr.h"
 
 /**
  * struct for list of emited pings
@@ -42,6 +43,7 @@ void		clear_all(ping_t *head);
  * MAIN FUNCTION
  */
 int			init_routine(void);
+int			start_routine(iphdr_t *iphdr);
 
  
 #endif // __PING_H__

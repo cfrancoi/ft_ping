@@ -6,5 +6,6 @@ int				resolve_dns(const char *c_addr, struct in_addr *dst);
 
 #include		"options.h"
 unsigned int	get_packet_size(const t_options *opts);
+void			*create_packet(int pid, int seq, int size, iphdr_t *ip);
 
 #endif // __UTILS_H__
