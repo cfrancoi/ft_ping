@@ -11,32 +11,51 @@
 #include <stdio.h>
 
 
+#include <signal.h>
+#include <unistd.h>
+
+
+void		sig_handler_alarm(int sig)
+{
+	void		*packet;
+	iphdr_t		iphdr;
+	(void)sig;
+
+	
+	if (g_ping_data.send != g_ping_data.opts.count)
+	{
+		create_iphdr(DEFAULT_SIZE, g_ping_data.opts.ttl, g_ping_data.opts.host, &iphdr);
+		packet = create_packet(getpid(), g_ping_data.send, g_ping_data.opts.size, &iphdr);
+		send_pckt(g_ping_data.send_sock, packet, g_ping_data.opts.size, &g_ping_data.sin);
+		
+		free(packet);
+		g_ping_data.send++;
+		alarm(1);
+	}
+	//return 0;
+}
+
 int		start_routine(iphdr_t *iphdr)
 {
 	int			seq;
 	void		*packet;
 
 	seq = 0;
-
-	while (seq != g_ping_data.opts.count)
+	signal(SIGALRM, &sig_handler_alarm);
+	alarm(1);
+	while (g_ping_data.recv != g_ping_data.opts.count)
 	{
 			//create_packet
 			packet = create_packet(getpid(), seq, g_ping_data.opts.size, iphdr);
 
 			//send ping
-			if (sendto(g_ping_data.send_sock, (const void *)packet, g_ping_data.opts.size, 0, (const struct sockaddr *)&g_ping_data.sin, sizeof(struct sockaddr)) <= 0)
-			{
-				perror("sendto()");
-				return 1;
-			}
-			else
-			{
-				printf("Packet send\n");
-			}
-				recv_pckt(g_ping_data.opts.size, &packet, &g_ping_data.sin, g_ping_data.rcv_sock);
+
+			//send_pckt(g_ping_data.send_sock, packet, g_ping_data.opts.size, &g_ping_data.sin);
+
+			recv_pckt(g_ping_data.opts.size, &packet, &g_ping_data.sin, g_ping_data.rcv_sock);
 
 			free(packet);
-			seq++;
+			g_ping_data.recv++;
 
 			//return (0);
 	}
