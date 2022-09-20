@@ -19,6 +19,7 @@ SRCS_DIR	= ./srcs/
 SRCS_FILE	= main.c
 SRCS_FILE	+= init_routine.c
 SRCS_FILE	+= start_routine.c
+SRCS_FILE	+= recv_pckt.c
 
 ## PARSING ##
 SRCS_FILE	+= parsing/get_flags.c
@@ -81,8 +82,11 @@ $(OBJS_DIR)%.o: $(UTILS_DIR)%.c $(INC)
 all: $(NAME)
 	@echo $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(LIBFTA):
+	make -C $(LIBFT_DIR)
+
+$(NAME): $(OBJS) $(LIBFTA)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTA) -o $(NAME)
 
 debug: CFLAGS += -D DEBUG_TEST
 debug: re
