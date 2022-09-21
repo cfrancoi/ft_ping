@@ -2,6 +2,23 @@
 #include "libft.h"
 
 #include <stdio.h>
+#include <sys/time.h>
+
+
+
+#include "ping.h"
+ping_t		*get_one(uint16_t seq, ping_t *head)
+{
+	while (head)
+	{
+		if (head->seq == seq)
+			return head;
+
+		head = head->next;
+	}
+
+	return (NULL);
+}
 
 int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock)
 {
@@ -18,6 +35,7 @@ int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock)
 
 		  	//setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv_out, sizeof tv_out);
 			//int rcv_sock = socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP);
+			struct timeval	tv;
 			if (recvfrom(rcv_sock, (void *)*packet, size, 0, (struct sockaddr *)sin, &t) <= 0)
 			{
 				perror("recvfrom()");
@@ -25,15 +43,25 @@ int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock)
 			}
 			else
 			{
-				printf("Packet rcv\n");
+				gettimeofday(&tv, NULL);
 
-				//iphdr_t *ip;
 				icmphdr_t *icmp;
 
 				icmp = *packet + IP_HEADER_LEN;
+				int seq;
+				
 
-				//write(2, packet, packet_size);
+				
+				seq = ntohs(icmp->seq);
+
+
+				printf("Packet rcv\n");
+
+				ping_t *ret = get_one(seq, g_ping_data.pings);
+
 				printf("Response: %u, code %u - seq %u, id: %u\n", (icmp->type), (icmp->code), ntohs(icmp->seq), ntohs(icmp->id));
+				if (ret != NULL)
+					printf("Time : %.3f ms\n", (double)((tv.tv_sec - ret->tv_send.tv_sec) * 1000 +  (double)(tv.tv_usec - ret->tv_send.tv_usec) / 1000));
 			}
 			return 0;
 

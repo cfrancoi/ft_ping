@@ -10,7 +10,7 @@ void push_back(ping_t **head, ping_t *new)
 
 	tmp = *head;
 	if (*head == NULL)
-		head = NULL;
+		*head = new;
 	else
 	{
 		while (tmp->next != NULL)

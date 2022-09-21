@@ -1,16 +1,16 @@
 #include "ping.h"
 
-void	clear_all(ping_t *head)
+void	clear_all(ping_t **head)
 {
 	ping_t	*tmp;
 
-	tmp = head;
+	tmp = *head;
 
-	while (head)
+	while (*head)
 	{
-		tmp = head->next;
+		tmp = (*head)->next;
 		
-		clear_one(head);
-		head = tmp;
+		clear_one(*head);
+		*head = tmp;
 	}
 };

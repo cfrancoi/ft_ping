@@ -45,11 +45,16 @@ SRCS_FILE	+= utils/create_packet.c
 
 ## PING_LIST ##
 
+SRCS_FILE	+= ping_list/push_back.c
+SRCS_FILE	+= ping_list/clear_all.c
+SRCS_FILE	+= ping_list/clear_one.c
+
 #For each subdirectory
 PARSING_DIR	= $(addprefix $(SRCS_DIR), parsing/)
 IP_DIR		= $(addprefix $(SRCS_DIR), ip/)
 ICMP_DIR	= $(addprefix $(SRCS_DIR), icmp/)
 UTILS_DIR	= $(addprefix $(SRCS_DIR), utils/)
+PING_DIR	= $(addprefix $(SRCS_DIR), ping_list/)
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 OBJS_DIR	= ./objs/
@@ -77,6 +82,10 @@ $(OBJS_DIR)%.o: $(ICMP_DIR)%.c $(INC)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR) -I $(LIBFT_INC)
 
 $(OBJS_DIR)%.o: $(UTILS_DIR)%.c $(INC)
+	@mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR) -I $(LIBFT_INC)
+
+$(OBJS_DIR)%.o: $(PING_DIR)%.c $(INC)
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR) -I $(LIBFT_INC)
 

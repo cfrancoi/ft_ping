@@ -27,7 +27,8 @@ int init_routine(void)
 
 
 	//create socket;
-
+	g_ping_data.send		= 0;
+	g_ping_data.pings		= NULL;
 	g_ping_data.sin			= init_sockaddr_in(&iphdr);
 	g_ping_data.send_sock	= socket(AF_INET, SOCK_RAW, IPPROTO_RAW); //fix check error
 	setsockopt(g_ping_data.send_sock, IPPROTO_IP, IP_HDRINCL, &on, sizeof(on)); //fix check error

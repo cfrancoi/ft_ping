@@ -38,7 +38,7 @@ ping_data_t g_ping_data;
 void		push_back(ping_t **head, ping_t *to_add);
 
 void		clear_one(ping_t *data);
-void		clear_all(ping_t *head);
+void		clear_all(ping_t **head);
 /**
  * MAIN FUNCTION
  */
