@@ -48,15 +48,18 @@ int resolve_dns(const char *c_addr, struct in_addr *dst)
 			return 1;
 		fprintf(stdout, "address is: %s\n", str);
 		fprintf(stdout, "dns is: %s\n", rp->ai_canonname);
-
+		
 		*dst = internet_addr->sin_addr;
 		char hbuf[NI_MAXHOST];
+		hbuf[NI_MAXHOST - 1] = '\0';
 		struct sockaddr *addr;     /* input */
-		socklen_t addrlen = {0};
+		socklen_t addrlen = sizeof(struct sockaddr);
 
 		addr = rp->ai_addr;
-		if (getnameinfo(addr, addrlen, hbuf, sizeof(hbuf), NULL, 0, NI_NAMEREQD) != 0)
-           printf("could not resolve hostname\n");
+		if (getnameinfo(addr, addrlen, hbuf, sizeof(hbuf), NULL, 0, NI_NAMEREQD) == -1)
+        {
+			perror("getnameinfo()");
+		}
 		else
 		{
 			printf("host=%s\n", hbuf);

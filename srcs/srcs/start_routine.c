@@ -18,6 +18,10 @@
 #include <sys/time.h>
 #include "ping.h"
 
+
+/**
+ *	Routine for alarm send ping with g_ping's data and resend alarm 
+ */
 void		sig_handler_alarm(int sig)
 {
 	void			*packet;
@@ -56,6 +60,10 @@ void		sig_handler_alarm(int sig)
 	//return 0;
 }
 
+
+/**
+ * Launch send routine and wait to rcv next ping
+ */
 int		start_routine(iphdr_t *iphdr)
 {
 	int			seq;

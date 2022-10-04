@@ -7,7 +7,10 @@
 
 
 #include "ping.h"
-ping_t		*get_one(uint16_t seq, ping_t *head)
+/**
+ * utils function to get ping from seq value
+ */
+static ping_t		*get_one(uint16_t seq, ping_t *head)
 {
 	while (head)
 	{
@@ -22,19 +25,11 @@ ping_t		*get_one(uint16_t seq, ping_t *head)
 
 int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock)
 {
-
 			struct sockaddr_in r_addr;
 
 			ft_memset ((char *)&r_addr, 0, sizeof (struct sockaddr_in));
 			socklen_t t = sizeof(struct sockaddr);
 			
-			//struct timeval tv_out;
-
-			//tv_out.tv_sec = RECV_TIMEOUT;
-			//tv_out.tv_usec = 0;
-
-		  	//setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv_out, sizeof tv_out);
-			//int rcv_sock = socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP);
 			struct timeval	tv;
 			if (recvfrom(rcv_sock, (void *)*packet, size, 0, (struct sockaddr *)sin, &t) <= 0)
 			{
@@ -53,8 +48,6 @@ int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock)
 
 				
 				seq = ntohs(icmp->seq);
-
-
 				printf("Packet rcv\n");
 
 				ping_t *ret = get_one(seq, g_ping_data.pings);

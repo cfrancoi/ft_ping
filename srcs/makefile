@@ -19,6 +19,7 @@ SRCS_DIR	= ./srcs/
 SRCS_FILE	= main.c
 SRCS_FILE	+= init_routine.c
 SRCS_FILE	+= start_routine.c
+SRCS_FILE	+= stop_routine.c
 SRCS_FILE	+= recv_pckt.c
 SRCS_FILE	+= send_pckt.c
 

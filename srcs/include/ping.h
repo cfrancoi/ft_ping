@@ -44,6 +44,7 @@ void		clear_all(ping_t **head);
  */
 int			init_routine(void);
 int			start_routine(iphdr_t *iphdr);
+int			stop_routine(void);
 int			recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock);
 int			send_pckt(int sock, void *packet, size_t size, void *sin);
 
