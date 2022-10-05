@@ -4,18 +4,15 @@
 	- https://jameshfisher.com/2018/02/03/what-does-getaddrinfo-do/
 
 
-# struc
-```
-	struct addrinfo {
-	               int              ai_flags;
-	               int              ai_family;
-	               int              ai_socktype;
-	               int              ai_protocol;
-	               socklen_t        ai_addrlen;
-	               struct sockaddr *ai_addr;
-	               char            *ai_canonname;
-	               struct addrinfo *ai_next;
-	           };
-
-	
-```
+# Todo
+ * stop_routine -> free memory and print stats
+ * catch signal SIGINT -> stop_routine
+ * list ICMP response and code
+ * format ping result
+ * struct for ipv4 & ipv6
+ * patern to launch ipv6
+ * move some utils function to libft (improve include...)
+ * clean resolve dns
+ * parsing failure (print error)
+ * add all other options
+ * fix Default value !
