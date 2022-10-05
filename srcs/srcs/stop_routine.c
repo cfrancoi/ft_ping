@@ -6,5 +6,5 @@
  */
 int			stop_routine(void)
 {
-
+	return (0);
 }

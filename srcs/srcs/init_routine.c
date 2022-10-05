@@ -37,7 +37,7 @@ int init_routine(void)
 	g_ping_data.rcv_sock	= socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP); //fix check error
 	
 	
-	//todo signal alarm 
+	//fix call after init
 	start_routine(&iphdr);
 
 	return (0);
