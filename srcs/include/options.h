@@ -15,6 +15,7 @@
 #define FLAGS_LIST "hv46cs"
 
 #define FLAG_NEED_PARAM (FLAG_C | FLAG_S)
+#define FLAGISSET(mask, flag) (mask & flag)
 
 typedef struct	s_options
 {

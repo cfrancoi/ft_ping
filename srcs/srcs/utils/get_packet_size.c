@@ -11,7 +11,7 @@ unsigned int	get_packet_size(const t_options *opts)
 
 	data_len = opts->size;
 
-	if (opts->flags & FLAG_6)
+	if (FLAGISSET(opts->flags, FLAG_6))
 	{
 		//fix me use V6 value
 		iphdr_len = IP_HEADER_LEN;
