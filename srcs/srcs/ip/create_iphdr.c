@@ -31,17 +31,13 @@ int create_iphdr(int packet_size, u_char ttl, const char *to, iphdr_t *dst_ip)
 	char ip_dst[42];
 	(void)inet_ntop(AF_INET, &dst, (char *)&ip_dst, sizeof(ip_dst));
 	ip_dst[41] = '\0';
-	printf("dest ip: %s\n", (char *)&ip_dst);
-	printf("IP_HDR_LEN : %lu\n", IP_HEADER_LEN);
-	//printf("ICMP_HDR_LEN : %u\n", ICMP_HEADER_LEN);
+	//debug_print("ICMP_HDR_LEN : %u\n", ICMP_HEADER_LEN);
 
 	struct in_addr ips[2];
 
 	ips[0] = src;
 	ips[1] = dst;
 	init_iphdr(&ip, packet_size, ttl, ips);
-	printf("IP Header init \n");
-
 	ip.ip_sum = checksum(&ip, IP_HEADER_LEN);
 
 	*dst_ip = ip;

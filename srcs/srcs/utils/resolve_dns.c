@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 
 #include <string.h> 
+#include "debug.h"
 
 // FIX clean me !
 int resolve_dns(const char *c_addr, struct in_addr *dst)
@@ -27,7 +28,7 @@ int resolve_dns(const char *c_addr, struct in_addr *dst)
 	s = getaddrinfo(c_addr, NULL, &hints, &result);
    //s = getaddrinfo(argv[1], NULL, NULL, &result);
    if (s != 0) {
-       fprintf(stderr, "getaddrinfo: %s\n", (char *)gai_strerror(s));
+       debug_print("getaddrinfo: %s\n", (char *)gai_strerror(s));
        return 1;
    }
 
@@ -40,14 +41,14 @@ int resolve_dns(const char *c_addr, struct in_addr *dst)
    {
 		struct sockaddr_in* internet_addr = (struct sockaddr_in*) rp->ai_addr;
 
-		/*fprintf(stdout, "address is: %s\n", inet_ntoa(internet_addr->sin_addr));
+		/*fdebug_print(stdout, "address is: %s\n", inet_ntoa(internet_addr->sin_addr));
 		*/
 
 		char str[INET_ADDRSTRLEN];
 		if (inet_ntop(AF_INET, &(internet_addr->sin_addr), str, INET_ADDRSTRLEN) == 0)
 			return 1;
-		fprintf(stdout, "address is: %s\n", str);
-		fprintf(stdout, "dns is: %s\n", rp->ai_canonname);
+		debug_print("address is: %s\n", str);
+		debug_print("dns is: %s\n", rp->ai_canonname);
 		
 		*dst = internet_addr->sin_addr;
 		char hbuf[NI_MAXHOST];
@@ -62,7 +63,7 @@ int resolve_dns(const char *c_addr, struct in_addr *dst)
 		}
 		else
 		{
-			printf("host=%s\n", hbuf);
+			debug_print("host=%s\n", hbuf);
 			break;
 		}
 	

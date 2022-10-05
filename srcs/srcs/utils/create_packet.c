@@ -6,14 +6,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <stdio.h>
+#include "debug.h"
 
 void		*create_packet(int pid, int seq, int size, iphdr_t *ip)
 {
 	icmphdr_t	icmp;
 
 	init_icmphdr(&icmp, pid, seq);
-	printf("ICMP Header init \n");
+	debug_print("ICMP Header init \n");
 
 	//write(2, &icmp, ICMP_HEADER_LEN);
 

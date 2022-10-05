@@ -40,19 +40,20 @@ int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock)
 			{
 				gettimeofday(&tv, NULL);
 
-				icmphdr_t *icmp;
+				icmphdr_t 	*icmp;
+				iphdr_t		*iphdr;
 
+				iphdr = *packet;
 				icmp = *packet + IP_HEADER_LEN;
 				int seq;
 				
 
 				
 				seq = ntohs(icmp->seq);
-				printf("Packet rcv\n");
 
 				ping_t *ret = get_one(seq, g_ping_data.pings);
 
-				printf("Response: %u, code %u - seq %u, id: %u\n", (icmp->type), (icmp->code), ntohs(icmp->seq), ntohs(icmp->id));
+				printf("Response: %u, code %u - seq %u, id: %u, ttl %u\n", (icmp->type), (icmp->code), ntohs(icmp->seq), ntohs(icmp->id), (iphdr->ip_ttl));
 				if (ret != NULL)
 					printf("Time : %.3f ms\n", (double)((tv.tv_sec - ret->tv_send.tv_sec) * 1000 +  (double)(tv.tv_usec - ret->tv_send.tv_usec) / 1000));
 			}
