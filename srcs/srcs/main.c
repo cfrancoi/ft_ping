@@ -3,6 +3,8 @@
 #include "options.h"
 #include "ping.h"
 
+ping_data_t		g_ping_data = {0};
+
 int main(int ac, const char **av)
 {
 

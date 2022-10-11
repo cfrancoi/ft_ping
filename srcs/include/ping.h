@@ -32,7 +32,9 @@ typedef struct	ping_data_s
 	int						send_sock;
 }				ping_data_t;
 
-ping_data_t g_ping_data;
+extern ping_data_t		g_ping_data;
+
+//g_ping_data = {0};
 
 
 void		push_back(ping_t **head, ping_t *to_add);
