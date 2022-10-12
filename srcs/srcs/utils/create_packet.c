@@ -1,30 +1,30 @@
-#include "iphdr.h"
 #include "icmphdr.h"
+#include "iphdr.h"
 #include "utils.h"
 
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "debug.h"
 
-void		*create_packet(int pid, int seq, int size, iphdr_t *ip)
+void *create_packet(int pid, int seq, int size, iphdr_t *ip)
 {
-	icmphdr_t	icmp;
+	icmphdr_t icmp;
 
 	init_icmphdr(&icmp, pid, seq);
 	debug_print("ICMP Header init \n");
 
-	//write(2, &icmp, ICMP_HEADER_LEN);
+	// write(2, &icmp, ICMP_HEADER_LEN);
 
 	/*char		data[PACKET_SIZE + 1] = { 1, 2, 3, 4, 0};
 
 	//memset(data, 1, PACKET_SIZE);
 	data[PACKET_SIZE] = 0;*/
 
-	char		*data = malloc(size + 1);
+	char *data = malloc(size + 1);
 	memset(data, 1, size);
-	char		*packet;
+	char *packet;
 
 	packet = create_icmp_pckt(ip, &icmp, data);
 	data[size] = 0;
@@ -39,5 +39,3 @@ void		*create_packet(int pid, int seq, int size, iphdr_t *ip)
 
 	return (packet);
 }
-	
-	

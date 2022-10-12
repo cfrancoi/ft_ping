@@ -33,16 +33,21 @@ SRCS_FILE	+= parsing/add_mask.c
 SRCS_FILE	+= parsing/set_flag_h.c
 SRCS_FILE	+= parsing/set_flag_c.c
 SRCS_FILE	+= parsing/set_flag_s.c
+
 ## IP ##
 SRCS_FILE	+= ip/init_iphdr.c
 SRCS_FILE	+= ip/create_iphdr.c
+
 ## ICMP ##
 SRCS_FILE	+= icmp/init_icmphdr.c
 SRCS_FILE	+= icmp/create_icmp_pckt.c
+
 ## UTILS ## 
 SRCS_FILE	+= utils/checksum.c
 SRCS_FILE	+= utils/resolve_dns.c
 SRCS_FILE	+= utils/create_packet.c
+SRCS_FILE	+= utils/print_stats.c
+SRCS_FILE	+= utils/free_memory.c
 
 ## PING_LIST ##
 
