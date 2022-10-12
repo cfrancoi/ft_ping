@@ -19,22 +19,22 @@ static struct sockaddr_in init_sockaddr_in(iphdr_t *iphdr)
 int init_routine(void)
 {
 	debug_print("FT_PING: can be start !\n");
-	iphdr_t   iphdr;
+
 	const int on = 1;
 
-	create_iphdr(DEFAULT_SIZE, g_ping_data.opts.ttl, g_ping_data.opts.host, &iphdr);
+	create_iphdr(DEFAULT_SIZE, g_ping_data.opts.ttl, g_ping_data.opts.host,
+	             &g_ping_data.iphdr);
 
 	// create socket;
 	g_ping_data.send = 0;
 	g_ping_data.pings = NULL;
-	g_ping_data.sin = init_sockaddr_in(&iphdr);
+	g_ping_data.sin = init_sockaddr_in(&g_ping_data.iphdr);
 	g_ping_data.send_sock = socket(AF_INET, SOCK_RAW, IPPROTO_RAW); // fix check error
 	setsockopt(g_ping_data.send_sock, IPPROTO_IP, IP_HDRINCL, &on, sizeof(on)); // fix check error
 
 	g_ping_data.rcv_sock = socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP); // fix check error
 
 	// fix call after init
-	start_routine(&iphdr);
 
 	return (0);
 }

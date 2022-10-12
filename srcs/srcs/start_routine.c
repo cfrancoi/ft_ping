@@ -53,7 +53,7 @@ void sig_handler_alarm(int sig)
 /**
  * Launch send routine and wait to rcv next ping
  */
-int start_routine(iphdr_t *iphdr)
+int start_routine(void)
 {
 	int   seq;
 	void *packet;
@@ -64,11 +64,8 @@ int start_routine(iphdr_t *iphdr)
 	while (g_ping_data.recv != g_ping_data.opts.count)
 	{
 		// create_packet
-		packet = create_packet(getpid(), seq, g_ping_data.opts.size, iphdr);
-
-		// send ping
-
-		// send_pckt(g_ping_data.send_sock, packet, g_ping_data.opts.size, &g_ping_data.sin);
+		packet =
+		    create_packet(getpid(), seq, g_ping_data.opts.size, &g_ping_data.iphdr);
 
 		recv_pckt(g_ping_data.opts.size, &packet, &g_ping_data.sin, g_ping_data.rcv_sock);
 

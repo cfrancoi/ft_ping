@@ -29,6 +29,7 @@ typedef struct ping_data_s
 	uint16_t           recv;  /* nu of receved */
 	int                rcv_sock;
 	int                send_sock;
+	iphdr_t            iphdr;
 } ping_data_t;
 
 extern ping_data_t g_ping_data;
@@ -43,7 +44,7 @@ void clear_all(ping_t **head);
  * MAIN FUNCTION
  */
 int init_routine(void);
-int start_routine(iphdr_t *iphdr);
+int start_routine(void);
 int stop_routine(void);
 int recv_pckt(int size, void **packet, struct sockaddr_in *sin, int rcv_sock);
 int send_pckt(int sock, void *packet, size_t size, void *sin);
