@@ -27,7 +27,7 @@ typedef struct s_options
 } t_options;
 
 #define DEFAULT_SIZE 56
-#define DEFAULT_TTL 255
+#define DEFAULT_TTL 12
 #define DEFAULT_COUNT -1
 
 /**

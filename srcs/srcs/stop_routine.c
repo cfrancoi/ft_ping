@@ -6,7 +6,7 @@
  */
 int stop_routine(void)
 {
-	print_stat();
+	print_stats();
 	free_memory();
 	return (0);
 }
