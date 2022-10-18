@@ -11,4 +11,7 @@ void        *create_packet(int pid, int seq, int size, iphdr_t *ip);
 void         print_stats(void);
 void         free_memory(void);
 
+#include "ping.h"
+void print_response(void *packet, int flags, ping_t *ping, struct timeval tv);
+
 #endif // __UTILS_H__

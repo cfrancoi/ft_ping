@@ -51,7 +51,7 @@ void sig_handler_alarm(int sig)
 }
 
 /**
- * Launch send routine and wait to rcv next ping
+ * Launch send's routine and wait to rcv next ping
  */
 int start_routine(void)
 {
