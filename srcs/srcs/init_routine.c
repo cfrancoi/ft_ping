@@ -29,12 +29,10 @@ int init_routine(void)
 	g_ping_data.send = 0;
 	g_ping_data.pings = NULL;
 	g_ping_data.sin = init_sockaddr_in(&g_ping_data.iphdr);
-	g_ping_data.send_sock = socket(AF_INET, SOCK_RAW, IPPROTO_RAW); // fix check error
+	g_ping_data.send_sock = socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP); // fix check error
 	setsockopt(g_ping_data.send_sock, IPPROTO_IP, IP_HDRINCL, &on, sizeof(on)); // fix check error
 
-	g_ping_data.rcv_sock = socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP); // fix check error
-
-	// fix call after init
-
+	g_ping_data.rcv_sock = g_ping_data.send_sock;
+	// socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP); // fix check error
 	return (0);
 }
