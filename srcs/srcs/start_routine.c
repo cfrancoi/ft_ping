@@ -15,6 +15,8 @@
 #include "ping.h"
 #include <sys/time.h>
 
+#include "debug.h"
+
 /**
  *	Routine for alarm send ping with g_ping's data and resend alarm
  */
@@ -40,6 +42,7 @@ void sig_handler_alarm(int sig)
 			data->tv_send = tv;
 		}
 		push_back(&g_ping_data.pings, data);
+
 		send_pckt(g_ping_data.send_sock, packet, g_ping_data.opts.size,
 		          &g_ping_data.sin);
 

@@ -2,6 +2,7 @@
 #include "icmphdr.h"
 #include "iphdr.h"
 #include "ping.h"
+#include <signal.h>
 
 // todo v6 & v4
 #include "libft.h"
@@ -14,6 +15,13 @@ static struct sockaddr_in init_sockaddr_in(iphdr_t *iphdr)
 	sin.sin_addr.s_addr = iphdr->ip_dst.s_addr;
 
 	return sin;
+}
+
+void sig_handler_sigint(int sig)
+{
+	(void) sig;
+	g_ping_data.opts.count = g_ping_data.send;
+	close(g_ping_data.rcv_sock);
 }
 
 int init_routine(void)
@@ -34,5 +42,7 @@ int init_routine(void)
 
 	g_ping_data.rcv_sock = g_ping_data.send_sock;
 	// socket(AF_INET, SOCK_RAW, IP_PROTO_ICMP); // fix check error
+
+	signal(SIGINT, sig_handler_sigint);
 	return (0);
 }

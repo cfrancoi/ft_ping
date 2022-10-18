@@ -48,6 +48,7 @@ SRCS_FILE	+= utils/resolve_dns.c
 SRCS_FILE	+= utils/create_packet.c
 SRCS_FILE	+= utils/print_stats.c
 SRCS_FILE	+= utils/free_memory.c
+SRCS_FILE	+= utils/print_response.c
 
 ## PING_LIST ##
 

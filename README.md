@@ -7,6 +7,7 @@
 # Todo
  * stop_routine -> free memory and print stats
  * catch signal SIGINT -> stop_routine
+ * g_ping data use one socket (change struct)
  * list ICMP response and code
  * format ping result
  * struct for ipv4 & ipv6
