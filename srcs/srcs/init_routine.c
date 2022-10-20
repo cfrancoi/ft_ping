@@ -21,7 +21,7 @@ void sig_handler_sigint(int sig)
 {
 	(void) sig;
 	g_ping_data.opts.count = g_ping_data.send;
-	close(g_ping_data.rcv_sock);
+	// close(g_ping_data.rcv_sock);
 }
 
 int init_routine(void)

@@ -1,9 +1,9 @@
-#include "options.h"
 #include "debug.h"
+#include "options.h"
 
-static int	ft_strchr_index(const char *s, const int c)
+static int ft_strchr_index(const char *s, const int c)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (s[i])
@@ -15,17 +15,15 @@ static int	ft_strchr_index(const char *s, const int c)
 	return (-1);
 }
 
-
-static int(*g_func_flag[])(const char *, t_options *opts, int flag) =
-{
-	set_flag_h,			//FLAG_H
-	set_simple_flag,	//FLAG_V
-	set_simple_flag,	//FLAG_4
-	set_simple_flag,	//FLAG_6
-	set_flag_c,			//FLAG_C
-	set_flag_s			//FLAG_S
+static int (*g_func_flag[])(const char *, t_options *opts, int flag) = {
+    set_flag_h,      // FLAG_H
+    set_simple_flag, // FLAG_V
+    set_simple_flag, // FLAG_4
+    set_simple_flag, // FLAG_6
+    set_flag_c,      // FLAG_C
+    set_flag_s,      // FLAG_S
+    set_flag_ttl     // FLAG_T
 };
-
 
 /**
  * 	return:
@@ -34,8 +32,8 @@ static int(*g_func_flag[])(const char *, t_options *opts, int flag) =
  * 	1  : next av
  *  2  : exit without err
  */
-int	set_flags(const char **s, size_t *i, size_t *j, t_options *opts)
-{	
+int set_flags(const char **s, size_t *i, size_t *j, t_options *opts)
+{
 	int n;
 	int flag;
 	int ret;
@@ -45,13 +43,13 @@ int	set_flags(const char **s, size_t *i, size_t *j, t_options *opts)
 	debug_print("FT_PING: set flags\n");
 	while (s[*i] && s[*i][*j])
 	{
-		n = ft_strchr_index(FLAGS_LIST, (const int)s[*i][*j]);
-		if (n == -1)	
+		n = ft_strchr_index(FLAGS_LIST, (const int) s[*i][*j]);
+		if (n == -1)
 			return (g_func_flag[0](&s[*i][*j], opts, FLAG_H));
 		flag = (1 << n);
-		
+
 		debug_print("PARS: %c param: %i\n", s[*i][*j], flag_need_param(flag));
-			
+
 		if (flag_need_param(flag))
 		{
 			if (s[*i][*j + 1] != '\0')

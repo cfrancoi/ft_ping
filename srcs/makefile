@@ -33,6 +33,7 @@ SRCS_FILE	+= parsing/add_mask.c
 SRCS_FILE	+= parsing/set_flag_h.c
 SRCS_FILE	+= parsing/set_flag_c.c
 SRCS_FILE	+= parsing/set_flag_s.c
+SRCS_FILE	+= parsing/set_flag_ttl.c
 
 ## IP ##
 SRCS_FILE	+= ip/init_iphdr.c

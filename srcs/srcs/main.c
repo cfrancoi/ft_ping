@@ -19,7 +19,7 @@ int main(int ac, const char **av)
 		if (ret == 0)
 		{
 			debug_print("FT_PING: can be start !\n");
-			init_routine(); // todo clean and call start_routine after init
+			init_routine();
 			start_routine();
 			stop_routine();
 		}
