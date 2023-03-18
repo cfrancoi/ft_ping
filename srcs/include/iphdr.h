@@ -3,9 +3,7 @@
 #include <netinet/in.h>
 #include <stdint.h>
 
-/*
- * //todo IP_PACKET_MAX_LEN
- */
+// TODO create iphdr for v6
 
 typedef struct iphdr_s
 {
@@ -25,7 +23,7 @@ typedef struct iphdr_s
 } iphdr_t;
 
 #define IP_HEADER_LEN sizeof(iphdr_t)
-//#define IP_HEADER_HL IP_HEADER_LEN / 5
+// #define IP_HEADER_HL IP_HEADER_LEN / 5
 #define IP_PROTO_ICMP 1
 
 void init_iphdr(iphdr_t *hdr, uint16_t len, uint8_t ttl, struct in_addr ip[2]);

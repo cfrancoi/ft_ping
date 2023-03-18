@@ -22,7 +22,7 @@
  */
 void sig_handler_alarm(int sig)
 {
-	void	      *packet;
+	void          *packet;
 	iphdr_t        iphdr;
 	struct timeval tv;
 	(void) sig;
@@ -48,7 +48,7 @@ void sig_handler_alarm(int sig)
 
 		free(packet);
 		g_ping_data.send++;
-		alarm(1);
+		alarm(1); // TODO change value for interval & use var.
 	}
 	// return 0;
 }
@@ -63,7 +63,7 @@ int start_routine(void)
 
 	seq = 0;
 	signal(SIGALRM, &sig_handler_alarm);
-	alarm(1);
+	alarm(1); // TODO change value for interval & use var.
 	while (g_ping_data.recv != g_ping_data.opts.count)
 	{
 		// create_packet

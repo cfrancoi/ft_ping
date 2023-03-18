@@ -13,7 +13,7 @@ unsigned int get_packet_size(const t_options *opts)
 
 	if (FLAGISSET(opts->flags, FLAG_6))
 	{
-		// fix me use V6 value
+		// FIXME me use V6 value
 		iphdr_len = IP_HEADER_LEN;
 		icmphdr_len = ICMP_HEADER_LEN;
 	}
